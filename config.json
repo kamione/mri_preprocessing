@@ -1,0 +1,81 @@
+{
+     "descriptions": [
+             {
+                     "dataType": "anat",
+                     "modalityLabel": "T1w",
+                     "customLabels": "",
+                     "criteria": {
+                             "SeriesDescription": "T1w_MPRAGE",
+                             "ImageType": ["ORIGINAL", "PRIMARY", "M", "ND", "NORM"]
+                     }
+             },
+             {
+                     "dataType": "anat",
+                     "modalityLabel": "T2w",
+                     "customLabels": "",
+                     "criteria": {
+                             "SeriesDescription": "T2_AX_struct"
+                     }
+             },
+             {
+                     "dataType": "func",
+                     "modalityLabel": "bold",
+                     "customLabels": "task-rest",
+         "sidecarChanges": {
+             "TaskName": "Resting State"
+         },
+                     "criteria": {
+                             "SeriesDescription": "*_resting_AP_*"
+                     }
+             },
+             {
+                     "dataType": "func",
+                     "modalityLabel": "bold",
+                     "customLabels": "task-gngreg",
+                     "criteria": {
+                             "SeriesDescription": "*_GNGregular*"
+                     }
+             },
+             {
+                     "dataType": "func",
+                     "modalityLabel": "bold",
+                     "customLabels": "task-gngrew",
+                     "criteria": {
+                             "SeriesDescription": "*_GNGreward*"
+                     }
+             },
+             {
+                     "dataType": "dwi",
+                     "modalityLabel": "dwi",
+                     "customLabels": "acq-APref",
+                     "criteria": {
+                             "SeriesDescription": "*p2_AP_TRACEW*"
+                     }
+             },
+             {
+                     "dataType": "dwi",
+                     "modalityLabel": "dwi",
+                     "customLabels": "acq-PAref",
+                     "criteria": {
+                             "SeriesDescription": "*p2_PA"
+                     }
+             },
+             {
+                     "dataType": "dwi",
+                     "modalityLabel": "dwi",
+                     "customLabels": "acq-AP",
+                     "criteria": {
+                             "SeriesDescription": "*p2_AP"
+                     }
+             },
+             {
+                     "dataType": "fmap",
+                     "modalityLabel": "epi",
+                     "criteria":{
+                             "SeriesDescription": "*_resting_PA*"
+             },
+                     "intendedFor": [2,3]
+             }
+
+             ]
+     }
