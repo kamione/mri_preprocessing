@@ -97,7 +97,7 @@ def main(range, dryrun, dcmconfig, forcecopy):
             print(cmd)
         else:
             # save log
-            cmd = f"{cmd} > {logdir}/{subjid}-{session}.log"
+            cmd = f"{cmd} > {logdir}/{config.projname}-{subjid}-{session}.log"
             pbar.update(1)
             os.system(cmd)
     if not dryrun:
