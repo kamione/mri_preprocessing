@@ -1,11 +1,9 @@
 #!/usr/bin/env python
-
 import os
 import click
 import shutil
 from tqdm import tqdm
 from pathlib import Path
-from time import sleep
 
 # Paremeters are read from the config.py file
 import config
@@ -22,6 +20,12 @@ def _parse_range(str_):
         unit = chunk.split('-')
         list_.update(range(int(unit[0]), int(unit[-1]) + 1))
     return sorted(list_)
+
+
+def _check_range(select, total):
+    if len(select) > len(total):
+        print("Error: Your selected range exceeds the total numbers of the dataset")
+        exit()
 
 
 def _copy_allfiles(source, destination):
@@ -43,6 +47,10 @@ def main(range, dryrun, dcmconfig, forcecopy):
     """
     cwd = Path.cwd()
 
+    subjlist = _parse_range(range)
+    # exit the program if selected subjects are more than the total number
+    _check_range(subjlist, config.datasets)
+
     bidsdir = Path(config.outdir, "BIDS_out")
     if not bidsdir.is_dir():
         bidsdir.mkdir(parents=True, exist_ok=True)
@@ -52,12 +60,13 @@ def main(range, dryrun, dcmconfig, forcecopy):
     if not tmpdcm.is_dir():
         tmpdcm.mkdir(parents=True, exist_ok=True)
 
-    subjlist = _parse_range(range)
+    logdir = Path(config.outdir, "log")
+    if not logdir.is_dir():
+        logdir.mkdir(parents=True, exist_ok=True)
 
-    if not dryrun:
+   if not dryrun:
         pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming",
                     colour="#BDC0BA")
-
     for subj in subjlist:
         selected_subj = config.datasets[subj]
         shortpath = selected_subj[0]
@@ -72,13 +81,13 @@ def main(range, dryrun, dcmconfig, forcecopy):
             # create the new destinaton directory
             subj_tmpdcm.mkdir(parents=True, exist_ok=True)
             # copy dicom files from raw data to a tmp folder
-            #_copy_allfiles(config.rawdir, subj_tmpdcm)
+            # _copy_allfiles(config.rawdir, subj_tmpdcm)
         else:
             if not subj_tmpdcm.is_dir():
                 # create the new destinaton directory
                 subj_tmpdcm.mkdir(parents=True, exist_ok=True)
                 # copy dicom files from raw data to a tmp folder
-                #_copy_allfiles(config.rawdir, subj_tmpdcm)
+                # _copy_allfiles(config.rawdir, subj_tmpdcm)
             else:
                 print("Copy is not performed!")
 
@@ -86,9 +95,6 @@ def main(range, dryrun, dcmconfig, forcecopy):
         # example:
         #   dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -s SESSION_ID \
         #   -c CONFIG_FILE -o BIDS_DIR
-        logdir = Path(config.outdir, "log")
-        if not logdir.is_dir():
-            logdir.mkdir(parents=True, exist_ok=True)
 
         cmd = f"dcm2bids -d {subj_tmpdcm} -p {subjid} -s {session} \
                 -c {dcmconfig} -o {bidsdir}"
@@ -98,8 +104,8 @@ def main(range, dryrun, dcmconfig, forcecopy):
         else:
             # save log
             cmd = f"{cmd} > {logdir}/{config.projname}-{subjid}-{session}.log"
-            pbar.update(1)
             os.system(cmd)
+            pbar.update(1)
     if not dryrun:
         pbar.close()
 
