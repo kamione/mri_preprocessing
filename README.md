@@ -19,6 +19,8 @@ Step 3:
 python 03_list_subj.py --listing
 
 # Sample Output of Step 3:
+# Indice can be used in the Step 4 and 5 to indicate which subjects you would
+# like to process
 # --------------------------------------------------------------------------------
 # Index                          ShortPath                          SubjID Session
 # --------------------------------------------------------------------------------
