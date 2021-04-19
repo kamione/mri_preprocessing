@@ -2,9 +2,16 @@
 ---
 ## Usage:
 
+Step 0:
+```bash
+# install required modules
+pip install -r requirements.txt
+# change directory to the script folder
+cd /path/to/script_folder
+```
+
 Step 1:
 ```bash
-cd /path/to/script_folder
 python 01_get_dicom.py -p /path/to/dicom_directory
 ```
 
