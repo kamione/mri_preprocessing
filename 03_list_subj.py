@@ -4,7 +4,7 @@ import config
 
 
 @click.command()
-@click.option("--listing", is_flag=True, help="list the sessions with index")
+@click.option("--listing", required=True, is_flag=True, help="list the sessions with index")
 def main(listing):
     if listing:
         dash = "-" * 80

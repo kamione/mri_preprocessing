@@ -64,7 +64,7 @@ def main(range, dryrun, dcmconfig, forcecopy):
     if not logdir.is_dir():
         logdir.mkdir(parents=True, exist_ok=True)
 
-   if not dryrun:
+    if not dryrun:
         pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming",
                     colour="#BDC0BA")
     for subj in subjlist:
