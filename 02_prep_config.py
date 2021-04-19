@@ -37,7 +37,7 @@ def main(subjid_init, input, projname, rawdir, outdir, containerdir):
     (e.g. /home/oldserver/eyegazetask) with the following command:
     $ find /home/oldserver/eyegazetask -name "DICOM" > dicomlist.txt
     """
-    # read in dicom directory paths from stdin
+    # read in dicom directory paths
     dicomdirs = []
     f = open(input)
     for line in f.readlines():

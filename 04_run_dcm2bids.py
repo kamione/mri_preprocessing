@@ -45,7 +45,6 @@ def main(range, dryrun, dcmconfig, forcecopy):
     RANGE     : a str of index, e.g. 0-2,5,9-11\n
     DCMCONFIG: a path of config.json for dicom files
     """
-    cwd = Path.cwd()
 
     subjlist = _parse_range(range)
     # exit the program if selected subjects are more than the total number
