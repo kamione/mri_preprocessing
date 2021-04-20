@@ -40,11 +40,13 @@ python 03_list_subj.py --listing
 
 Step 4:
 ```bash
+# transform dicom to nii with a BIDS structure
 python 04_run_dcm2bids.py 0-2 config.json --forcecopy
 ```
 
 Step 5:
 ```bash
+# run fmriprep
 python 05_run_fmriprep.py 0-2
 ```
 
