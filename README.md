@@ -49,7 +49,7 @@ python 05_run_fmriprep.py 0-2
 ```
 
 ---
-config.json is a project specfic config file, specifying how the dim2bids
+*REMARKS*: config.json is a project specfic config file, specifying how the dim2bids
 function organizes the output nifti files
 
 ---
