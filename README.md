@@ -2,6 +2,8 @@
 ---
 ## Usage:
 
+Requirements: dcm2niix, dcm2bids and fmriprep (version: 20.2.1)
+
 Step 0:
 ```bash
 # install required modules
