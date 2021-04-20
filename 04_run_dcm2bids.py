@@ -31,9 +31,12 @@ def _check_range(select, total):
 def _copy_allfiles(source, destination):
     """"Copy all files in a directory to a destination"""
     for file in os.listdir(source):
-        fullpath = Path(source, file)
-        if fullpath.is_file():
-            shutil.copy2(fullpath, destination)
+        fp_source = Path(source, file)
+        fp_destination = Path(destination, file)
+        if fp_source.is_dir():
+            shutil.copytree(fp_source, fp_destination)
+        else:
+            shutil.copy2(fp_source, fp_destination)
 
 
 @click.command()
@@ -82,15 +85,23 @@ dcmconfig: a path to a config.json for dicom files
             # create the new destinaton directory
             subj_tmpdcm.mkdir(parents=True, exist_ok=True)
             # copy dicom files from raw data to a tmp folder
-            _copy_allfiles(shortpath, subj_tmpdcm)
+            try:
+                _copy_allfiles(shortpath, subj_tmpdcm)
+            except PermissionError:
+                # in case _copy_allfiles does not work
+                cmdCopy = f"cp -rf {shortpath}/* {subj_tmpdcm}"
+                os.system(cmdCopy)
         else:
             if not subj_tmpdcm.is_dir():
                 # create the new destinaton directory
                 subj_tmpdcm.mkdir(parents=True, exist_ok=True)
                 # copy dicom files from raw data to a tmp folder
-                _copy_allfiles(shortpath, subj_tmpdcm)
-            else:
-                print("Copy is not performed!")
+                try:
+                    _copy_allfiles(shortpath, subj_tmpdcm)
+                except PermissionError:
+                    # in case _copy_allfiles does not work
+                    cmdCopy = f"cp -rf {shortpath}/* {subj_tmpdcm}"
+                    os.system(cmdCopy)
 
         # create the conversion command using dcm2bids
         # example:
