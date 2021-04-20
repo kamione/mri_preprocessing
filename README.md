@@ -47,6 +47,8 @@ python 04_run_dcm2bids.py 0-2 config.json --forcecopy
 Step 5:
 ```bash
 # run fmriprep
+# this script will check if FreeSurfer license.txt exit in the output folder
+# if not, it will copy the current license.txt file to the output folder
 python 05_run_fmriprep.py 0-2
 ```
 
