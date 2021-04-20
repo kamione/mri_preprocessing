@@ -33,7 +33,7 @@ def _check_range(select, total):
 def main(range, dryrun):
     """Run fmriprep"""
 
-    bids_dir = Path(config.outdir, 'BIDS_output')
+    bids_dir = Path(config.outdir, 'BIDS_out')
     fmriprep_dir = Path(config.outdir, 'derivatives')  # fullpath for output
     if not fmriprep_dir.is_dir():
         fmriprep_dir.mkdir(parents=True, exist_ok=True)
@@ -66,7 +66,7 @@ def main(range, dryrun):
         """
 
         # session_id is not a valid argument even for most recent
-        # container  fmriprep 20.1.1
+        # container  fmriprep 20.2.1
         # --session_id
         cmd = f"singularity run -B {bids_dir}:/work -B {fmriprep_dir}:/output \
         -B {config.outdir}:/main \

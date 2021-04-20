@@ -33,9 +33,11 @@ def intro(projname, rawdir, outdir, containerdir):
 @click.option("--containerdir", prompt="Container Directory", required=True)
 def main(subjid_init, input, projname, rawdir, outdir, containerdir):
     """
-    Prepare a config.py from a dicomlist.py generated in the source directory
-    (e.g. /home/oldserver/eyegazetask) with the following command:
-    $ find /home/oldserver/eyegazetask -name "DICOM" > dicomlist.txt
+Prepare a config.py from a dicomlist.py generated in the source directory
+(e.g. /home/oldserver/eyegazetask) with the following command:
+$ find /home/oldserver/eyegazetask -name "DICOM" > dicomlist.txt
+
+P.S. fmriprep 1.2.5 and 20.2.1 were tested
     """
     # read in dicom directory paths
     dicomdirs = []
