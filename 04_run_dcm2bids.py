@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
 import click
 import shutil
@@ -87,7 +87,7 @@ dcmconfig: a path to a config.json for dicom files
             # copy dicom files from raw data to a tmp folder
             try:
                 _copy_allfiles(shortpath, subj_tmpdcm)
-            except PermissionError:
+            except:
                 # in case _copy_allfiles does not work
                 cmdCopy = f"cp -rf {shortpath}/* {subj_tmpdcm}"
                 os.system(cmdCopy)
@@ -98,7 +98,7 @@ dcmconfig: a path to a config.json for dicom files
                 # copy dicom files from raw data to a tmp folder
                 try:
                     _copy_allfiles(shortpath, subj_tmpdcm)
-                except PermissionError:
+                except:
                     # in case _copy_allfiles does not work
                     cmdCopy = f"cp -rf {shortpath}/* {subj_tmpdcm}"
                     os.system(cmdCopy)
@@ -107,13 +107,12 @@ dcmconfig: a path to a config.json for dicom files
         # example:
         #   dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -s SESSION_ID \
         #   -c CONFIG_FILE -o BIDS_DIR
-
         cmd = f"dcm2bids \
-                -d {subj_tmpdcm} \
+                -d {os.fspath(subj_tmpdcm)} \
                 -p {subjid} \
                 -s {session} \
                 -c {dcmconfig} \
-                -o {bidsdir} \
+                -o {os.fspath(bidsdir)} \
                 --forceDcm2niix --clobber"
 
         if dryrun:
@@ -121,6 +120,7 @@ dcmconfig: a path to a config.json for dicom files
         else:
             os.system(cmd)
             pbar.update(1)
+
     if not dryrun:
         pbar.close()
 

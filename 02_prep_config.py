@@ -4,12 +4,12 @@ import os
 import path
 
 
-def intro(projname, rawdir, outdir, containerdir):
+def intro(projname, rawdir, outdir, containerdir, scriptdir):
     """
-    projname = "eyegaze"
-    srcdir = '/home/oldserver/eyegazetask'
-    destdir = '/home/share/eyegaze_BIDS'
-    container = "/home/share/Containers/tjhendrickson-BIDS_scripts-master-latest.simg"
+projname = "Project A"
+srcdir = '/home/oldserver/project'
+destdir = '/home/users/projects/project_a'
+container = "/home/share/Containers/fmriprep-20.2.1.simg"
     """
     str = []
     tmp = f'projname = "{projname}"\n'
@@ -19,6 +19,8 @@ def intro(projname, rawdir, outdir, containerdir):
     tmp = f'outdir = "{outdir}"\n'
     str.append(tmp)
     tmp = f'container = "{containerdir}"\n'
+    str.append(tmp)
+    tmp = f'scriptdir = "{scriptdir}"\n'
     str.append(tmp)
     return ''.join(str)
 
@@ -31,7 +33,8 @@ def intro(projname, rawdir, outdir, containerdir):
 @click.option("--rawdir", prompt="Raw Directory", required=True)
 @click.option("--outdir", prompt="Output Directory", required=True)
 @click.option("--containerdir", prompt="Container Directory", required=True)
-def main(subjid_init, input, projname, rawdir, outdir, containerdir):
+@click.option("--scriptdir", prompt="Script Directory", required=True)
+def main(subjid_init, input, projname, rawdir, outdir, containerdir, scriptdir):
     """
 Prepare a config.py from a dicomlist.py generated in the source directory
 (e.g. /home/oldserver/eyegazetask) with the following command:
@@ -49,7 +52,7 @@ P.S. fmriprep 1.2.5 and 20.2.1 were tested
     dicomdirs = sorted(dicomdirs)
 
     fo = open("config.py", "w")
-    fo.write(intro(projname, rawdir, outdir, containerdir))
+    fo.write(intro(projname, rawdir, outdir, containerdir, scriptdir))
     fo.write("datasets = [\n")
     for dir_ in dicomdirs:
         session_init = 0

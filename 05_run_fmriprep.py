@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import click
 import os
+import shutil
 from tqdm import tqdm
 from pathlib import Path
 
@@ -10,9 +11,9 @@ import config
 
 def _parse_range(str_):
     """
-    Parse a string like numeric index set to a list
-    INPUT : "0-2,5,9-11"
-    OUTPUT: [0, 1, 2, 5, 9, 10, 11]
+Parse a string like numeric index set to a list
+INPUT : "0-2,5,9-11"
+OUTPUT: [0, 1, 2, 5, 9, 10, 11]
     """
     list_ = set()
     for chunk in str_.split(','):
@@ -43,6 +44,11 @@ def main(range, dryrun):
     # exit the program if selected subjects are more than the total number
     _check_range(subjlist, config.datasets)
 
+    # copy the license.txt to output
+    license = Path(config.outdir, "license.txt")
+    if not license.is_file():
+        shutil.copy2(Path(config.scriptdir, "license.txt"), license)
+
     if not dryrun:
         pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming",
                     colour="#BDC0BA")
@@ -57,12 +63,12 @@ def main(range, dryrun):
 
         # sample command
         """
-        singularity run -B $BIDS/BIDS_output/:/work -B $BIDS/fmriprep_output:/output \
-        $CONTAINER /work /output participant \
-        --participant_label 013 \
-        --fs-license-file /output/license.txt \
-        --use-aroma \
-        --use-syn-sdc
+singularity run -B $BIDS/BIDS_output/:/work -B $BIDS/fmriprep_output:/output \
+$CONTAINER /work /output participant \
+--participant_label 013 \
+--fs-license-file /output/license.txt \
+--use-aroma \
+--use-syn-sdc
         """
 
         # session_id is not a valid argument even for most recent
