@@ -31,7 +31,7 @@ python 03_list_subj.py --listing
 # Indice can be used in the Step 4 and 5 to indicate which subjects you would
 # like to include and process
 # --------------------------------------------------------------------------------
-# Index                          ShortPath                          SubjID Session
+# Index                      DICOM Directories                      SubjID Session
 # --------------------------------------------------------------------------------
 # 0     /home/user/projects/rpp_C002/DICOM                            001   0000  
 # 1     /home/user/projects/rpp_C002_GE/DICOM                         002   0000  
