@@ -33,9 +33,9 @@ python 03_list_subj.py --listing
 # --------------------------------------------------------------------------------
 # Index                      DICOM Directories                      SubjID Session
 # --------------------------------------------------------------------------------
-# 0     /home/user/projects/rpp_C002/DICOM                            001   0000  
-# 1     /home/user/projects/rpp_C002_GE/DICOM                         002   0000  
-# 2     /home/user/projects/rpp_C003/DICOM                            003   0000
+# 0     /home/user/projects/subj0001/DICOM                            001   0000  
+# 1     /home/user/projects/subj0002/DICOM                            002   0000  
+# 2     /home/user/projects/subj0003/DICOM                            003   0000
 ```
 
 Step 4:
