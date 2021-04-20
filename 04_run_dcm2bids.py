@@ -31,7 +31,9 @@ def _check_range(select, total):
 def _copy_allfiles(source, destination):
     """"Copy all files in a directory to a destination"""
     for file in os.listdir(source):
-        shutil.copy2(file, destination)
+        fullpath = Path(source, file)
+        if fullpath.is_file():
+            shutil.copy2(fullpath, destination)
 
 
 @click.command()
@@ -41,31 +43,30 @@ def _copy_allfiles(source, destination):
 @click.option("--forcecopy", is_flag=True, help="force copy of dicom data")
 def main(range, dryrun, dcmconfig, forcecopy):
     """
-    Converting DICOM images to a BIDS format\n
-    RANGE     : a str of index, e.g. 0-2,5,9-11\n
-    DCMCONFIG: a path of config.json for dicom files
+Converting DICOM images to a BIDS format\n
+range    : a str of index, e.g. 0-2,5,9-11\n
+dcmconfig: a path to a config.json for dicom files
     """
 
     subjlist = _parse_range(range)
     # exit the program if selected subjects are more than the total number
     _check_range(subjlist, config.datasets)
 
+    # make if BIDS_out folder does not exist
     bidsdir = Path(config.outdir, "BIDS_out")
     if not bidsdir.is_dir():
         bidsdir.mkdir(parents=True, exist_ok=True)
 
-    # create if tmp_dcm folder does not exist
+    # make if tmp_dcm folder does not exist
     tmpdcm = Path(config.rawdir, "tmp_dcm")
     if not tmpdcm.is_dir():
         tmpdcm.mkdir(parents=True, exist_ok=True)
 
-    logdir = Path(config.outdir, "log")
-    if not logdir.is_dir():
-        logdir.mkdir(parents=True, exist_ok=True)
-
+    # flag dry run without really running the transformation
     if not dryrun:
         pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming",
                     colour="#BDC0BA")
+
     for subj in subjlist:
         selected_subj = config.datasets[subj]
         shortpath = selected_subj[0]
@@ -73,6 +74,7 @@ def main(range, dryrun, dcmconfig, forcecopy):
         session = selected_subj[2]
 
         subj_tmpdcm = Path(tmpdcm, subjid, session)
+        # overwrite the existing temp files
         if forcecopy:
             # check if subj_tmpdcm exists then delete it
             if subj_tmpdcm.is_dir():
@@ -80,13 +82,13 @@ def main(range, dryrun, dcmconfig, forcecopy):
             # create the new destinaton directory
             subj_tmpdcm.mkdir(parents=True, exist_ok=True)
             # copy dicom files from raw data to a tmp folder
-            # _copy_allfiles(config.rawdir, subj_tmpdcm)
+            _copy_allfiles(shortpath, subj_tmpdcm)
         else:
             if not subj_tmpdcm.is_dir():
                 # create the new destinaton directory
                 subj_tmpdcm.mkdir(parents=True, exist_ok=True)
                 # copy dicom files from raw data to a tmp folder
-                # _copy_allfiles(config.rawdir, subj_tmpdcm)
+                _copy_allfiles(shortpath, subj_tmpdcm)
             else:
                 print("Copy is not performed!")
 
@@ -95,14 +97,17 @@ def main(range, dryrun, dcmconfig, forcecopy):
         #   dcm2bids -d DICOM_DIR -p PARTICIPANT_ID -s SESSION_ID \
         #   -c CONFIG_FILE -o BIDS_DIR
 
-        cmd = f"dcm2bids -d {subj_tmpdcm} -p {subjid} -s {session} \
-                -c {dcmconfig} -o {bidsdir}"
+        cmd = f"dcm2bids \
+                -d {subj_tmpdcm} \
+                -p {subjid} \
+                -s {session} \
+                -c {dcmconfig} \
+                -o {bidsdir} \
+                --forceDcm2niix --clobber"
 
         if dryrun:
             print(cmd)
         else:
-            # save log
-            cmd = f"{cmd} > {logdir}/{config.projname}-{subjid}-{session}.log"
             os.system(cmd)
             pbar.update(1)
     if not dryrun:

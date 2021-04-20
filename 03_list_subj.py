@@ -9,7 +9,7 @@ def main(listing):
     if listing:
         dash = "-" * 80
         print(dash)
-        print(f"{'Index' : <6}{'ShortPath':^60}{'SubjID':^7}{'Session':^7}")
+        print(f"{'Index' : <6}{'Path':^60}{'SubjID':^7}{'Session':^7}")
         print(dash)
         count = 0
         for subjinfo in config.datasets:

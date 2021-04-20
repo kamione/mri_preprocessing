@@ -43,10 +43,6 @@ def main(range, dryrun):
     # exit the program if selected subjects are more than the total number
     _check_range(subjlist, config.datasets)
 
-    logdir = Path(config.outdir, "log")
-    if not logdir.is_dir():
-        logdir.mkdir(parents=True, exist_ok=True)
-
     if not dryrun:
         pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming",
                     colour="#BDC0BA")
@@ -87,7 +83,6 @@ def main(range, dryrun):
         if dryrun:
             print(cmd)
         else:
-            cmd = f"{cmd} > {logdir}/fmriprep_{subjid}-{session}.log"
             os.system(cmd)
             pbar.update(1)
     if not dryrun:
