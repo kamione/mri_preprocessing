@@ -25,7 +25,7 @@ python 02_prep_config.py 1 -i dicomlist.txt
 
 Step 3:
 ```bash
-python 03_list_subj.py --listing
+python 03_list_subj.py
 
 # Sample Output of Step 3:
 # Indice can be used in the Step 4 and 5 to indicate which subjects you would
@@ -53,8 +53,8 @@ python 05_run_fmriprep.py 0-2
 ```
 
 ---
-*REMARKS*: config.json is a project specfic config file, specifying how the dim2bids
-function organizes the output nifti files
+*REMARKS*: config.json is a project specific config file, specifying how the dim2bids
+function organizes the output NIFTI files
 
 ---
 adapted from <https://github.com/kelvinlim/bids_scripts>
