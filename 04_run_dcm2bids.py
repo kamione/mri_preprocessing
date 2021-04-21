@@ -61,7 +61,7 @@ dcmconfig: a path to a config.json for dicom files
         bidsdir.mkdir(parents=True, exist_ok=True)
 
     # make if tmp_dcm folder does not exist
-    tmpdcm = Path(config.rawdir, "tmp_dcm")
+    tmpdcm = Path(config.outdir, "tmp_dcm")
     if not tmpdcm.is_dir():
         tmpdcm.mkdir(parents=True, exist_ok=True)
 
