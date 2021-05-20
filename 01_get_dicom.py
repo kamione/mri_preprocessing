@@ -1,7 +1,9 @@
-#!/usr/bin/env python
+# Environment ------------------------------------------------------------------
 import os
 import click
 
+
+# Main -------------------------------------------------------------------------
 
 @click.command()
 @click.option("-p", "--path", type=click.Path(exists=True), required=True,
@@ -13,5 +15,6 @@ def main(path):
     os.system(cmd)
 
 
+# Terminal Function ------------------------------------------------------------
 if __name__ == '__main__':
     main()
