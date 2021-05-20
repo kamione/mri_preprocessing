@@ -55,9 +55,14 @@ Step 5:
 
 ```bash
 # run fmriprep
-# this script will check if FreeSurfer license.txt exists in the output folder
-# if not, it will copy the current license.txt file to the output folder
 python 05_run_fmriprep.py 0-2
+```
+
+Step 6:
+
+```bash
+# run mriqc
+python 06_run_mriqc.py 0-2
 ```
 
 ---
