@@ -13,7 +13,7 @@ def _uniq(input):
     output = []
     for x in input:
         if x not in output:
-        output.append(x)
+            output.append(x)
     return output
 
 
