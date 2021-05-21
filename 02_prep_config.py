@@ -9,14 +9,12 @@ def intro(projname, rawdir, outdir, containerdir, fmriprep_ver, mriqc_ver, scrip
 Samples:
 
 projname = "Project A"
-srcdir = '/home/oldserver/projects'
-destdir = '/home/olderserver/Project_A'
+srcdir = "/home/oldserver/projects"
+destdir = "/home/olderserver/Project_A"
 container = "/home/share/Containers"
-fmriprep = "/home/share/Containers/fmriprep-20.2.1.simg"
-mriqc = "/home/share/Containers/fmriprep-0.16.1.simg"
-container = "/home/share/Containers/fmriprep-20.2.1.simg"
+fmriprep = "20.2.1"
+mriqc = "0.16.1"
     """
-    
     str = []
     tmp = f'projname = "{projname}"\n'
     str.append(tmp)
@@ -35,7 +33,6 @@ container = "/home/share/Containers/fmriprep-20.2.1.simg"
     tmp = f'scriptdir = "{scriptdir}"\n'
     str.append(tmp)
     return ''.join(str)
-
 
 
 @click.command()
@@ -71,11 +68,12 @@ P.S. fmriprep 1.2.5 and 20.2.1 were tested
     fo.write(
         intro(projname, rawdir, outdir, containerdir, fmriprep_ver, mriqc_ver,
               scriptdir)
-        )
+    )
     fo.write("datasets = [\n")
     for dir_ in dicomdirs:
         session_init = 0
-        fo.write(f'    ["{dir_}", "{subjid_init:03d}", "{session_init:04d}"],\n')
+        fo.write(
+            f'    ["{dir_}", "{subjid_init:03d}", "{session_init:04d}"],\n')
         subjid_init += 1
         session_init += 1
     fo.write("]")
