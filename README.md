@@ -67,10 +67,10 @@ python 06_run_mriqc.py 0-2
 
 ---
 
-_REMARKS 1_: config.json is a project specific config file, specifying how the
+_*REMARKS 1*_: config.json is a project specific config file, specifying how the
 dim2bids function organizes the output NIFTI files
 
-_REMARKS 2_: dataset_description.json is a mandatory metadata file which is
+_*REMARKS 2*_: dataset_description.json is a mandatory metadata file which is
 placed in the BIDS output folder
 
 ---
