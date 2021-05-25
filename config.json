@@ -1,0 +1,35 @@
+{
+    "descriptions": [
+        {
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "SeriesDescription": "MPRAGE SENSE"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-task1",
+            "criteria": {
+        	"SeriesDescription": "TASK FMRI"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-task2",
+            "criteria": {
+        	"SeriesDescription": "TASK FMRI II"
+            }
+        },
+	{
+	    "dataType": "func",
+	    "modalityLabel": "bold",
+	    "customLabels": "task-rest",
+	    "criteria": {
+	    "SeriesDescription": "RESTING FMRI"
+        }
+	}
+    ]
+}
