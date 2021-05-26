@@ -73,7 +73,7 @@ $CONTAINER /work /output participant \
         # --session_id
         cmd = f"singularity run -B {bids_dir}:/work -B {derivatives_dir}:/output \
         -B {config.outdir}:/main \
-        {config.fmriprep}/work /output participant \
+        {config.fmriprep} /work /output participant \
         --participant_label {subjid}\
         --fs-license-file /main/license.txt \
         --use-aroma \
