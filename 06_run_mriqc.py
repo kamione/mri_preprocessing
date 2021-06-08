@@ -42,7 +42,11 @@ def main(range, nthreads, dryrun):
 
     subjlist = _parse_range(range)
     tmplist = []
-
+    
+    # check if output directory exists; if not, make it
+    if not output_dir.is_dir():
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
     for i in config.datasets:
         tmplist.append(i[1])
     labels = _uniq(tmplist)
