@@ -4,7 +4,10 @@ import os
 from pathlib import Path
 
 # Main -------------------------------------------------------------------------
-def intro(projname, rawdir, outdir, containerdir, fmriprep_ver, mriqc_ver, scriptdir):
+
+
+def intro(projname, rawdir, outdir, containerdir, fmriprep_ver, mriqc_ver,
+          qsiprep_ver, scriptdir):
     """
 Samples:
 
@@ -14,6 +17,7 @@ destdir = "/home/olderserver/Project_A"
 container = "/home/share/Containers"
 fmriprep = "20.2.1"
 mriqc = "0.16.1"
+qsiprep = "0.13.1"
     """
     str = []
     tmp = f'projname = "{projname}"\n'
@@ -30,6 +34,9 @@ mriqc = "0.16.1"
     mriqc_dir = Path(containerdir, f"mriqc-{mriqc_ver}.simg")
     tmp = f'mriqc = "{mriqc_dir}"\n'
     str.append(tmp)
+    qsiprep_dir = Path(containerdir, f"qsiprep-{qsiprep_ver}.sif")
+    tmp = f'qsiprep = "{qsiprep_dir}"\n'
+    str.append(tmp)
     tmp = f'scriptdir = "{scriptdir}"\n'
     str.append(tmp)
     return ''.join(str)
@@ -45,9 +52,10 @@ mriqc = "0.16.1"
 @click.option("--containerdir", prompt="Container Directory", required=True)
 @click.option("--fmriprep_ver", prompt="fMRIprep Version", required=True)
 @click.option("--mriqc_ver", prompt="MRIQC Version", required=True)
+@click.option("--qsiprep_ver", prompt="QSIprep Version", required=True)
 @click.option("--scriptdir", prompt="Script Directory", required=True)
 def main(subjid_init, input, projname, rawdir, outdir, containerdir,
-         fmriprep_ver, mriqc_ver, scriptdir):
+         fmriprep_ver, mriqc_ver, qsiprep_ver, scriptdir):
     """
 Prepare a config.py from a dicomlist.py generated in the source directory
 (e.g. /home/oldserver/eyegazetask) with the following command:
@@ -67,7 +75,7 @@ P.S. fmriprep 1.2.5 and 20.2.1 were tested
     fo = open("config.py", "w")
     fo.write(
         intro(projname, rawdir, outdir, containerdir, fmriprep_ver, mriqc_ver,
-              scriptdir)
+              qsiprep_ver, scriptdir)
     )
     fo.write("datasets = [\n")
     for dir_ in dicomdirs:
