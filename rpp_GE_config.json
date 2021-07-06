@@ -1,0 +1,48 @@
+{
+    "descriptions": [
+        {
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "SeriesDescription": "rhimsize 240_3D SAG T1 MPRAGE"
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SeriesDescription": "*DWI TENSOR B-1000*"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-task",
+            "criteria": {
+                "SeriesDescription": "*fMRI task*"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-rest",
+            "criteria": {
+                "SeriesDescription": "rhimsize80_fMRI resting*"
+            }
+        },
+        {
+            "dataType": "fmap",
+            "modalityLabel": "fmap",
+            "criteria": {
+                "SidecarFilename": "*Fieldmap_fMRI*"
+            }
+        },
+        {
+            "dataType": "dwi",
+            "modalityLabel": "dwi",
+            "criteria": {
+                "SidecarFilename": "004_0000_1614_&_rhimsize96_DWI_TENSOR_B-1000_40_directions"
+            }
+        }
+    ]
+}
