@@ -12,7 +12,7 @@ def main():
         shortpath = subjinfo[0]
         subjid = subjinfo[1]
         session = subjinfo[2]
-        print(f"{count : <6}{shortpath:<60}{subjid:^7}{session:^7}")
+        print(f"{count:<6}{shortpath:<60}{subjid:^7}{session:^7}")
         count += 1
 
 
