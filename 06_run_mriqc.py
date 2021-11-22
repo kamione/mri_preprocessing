@@ -31,30 +31,30 @@ OUTPUT: [0, 1, 2, 5, 9, 10, 11]
 
 
 @click.command()
-@click.argument("range")
-@click.option("--nthreads", default=8, help="Number of Threads", show_default=True)
-@click.option("--dryrun", is_flag=True, help="print cmd only")
+@click.argument('range')
+@click.option('--nthreads', default=8, help='Number of Threads', show_default=True)
+@click.option('--dryrun', is_flag=True, help='print cmd only')
 def main(range, nthreads, dryrun):
     """Run MRIQC"""
-    bids_dir = Path(config.outdir, "BIDS_out")
-    output_dir = Path(config.outdir, "derivatives", "mriqc")
-    work_dir = Path(config.outdir, "Work")
+    bids_dir = Path(config.outdir, 'BIDS_out')
+    output_dir = Path(config.outdir, 'derivatives', 'mriqc')
+    work_dir = Path(config.outdir, 'Work')
 
     subjlist = _parse_range(range)
     tmplist = []
-    
+
     # check if output directory exists; if not, make it
     if not output_dir.is_dir():
         output_dir.mkdir(parents=True, exist_ok=True)
-        
+
     for i in config.datasets:
         tmplist.append(i[1])
     labels = _uniq(tmplist)
-    
+
     for subj in subjlist:
         label = labels[subj]
 
-        cmd = f"singularity run --cleanenv \
+        cmd = f'singularity run --cleanenv \
             -B {bids_dir}:/data:ro \
             -B {output_dir}:/out \
             -B {work_dir}:/work \
@@ -65,8 +65,8 @@ def main(range, nthreads, dryrun):
             --participant-label sub-{label} \
             --n_proc {nthreads} \
             --no-sub \
-            -w /work"
-        
+            -w /work'
+
         if dryrun:
             print(cmd)
         else:
@@ -74,8 +74,5 @@ def main(range, nthreads, dryrun):
 
 
 # Terminal Function ------------------------------------------------------------
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
-
-
-
