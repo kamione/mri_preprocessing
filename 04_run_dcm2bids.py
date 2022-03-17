@@ -67,8 +67,7 @@ dcmconfig: a path to a config.json for dicom files
 
     # flag dry run without really running the transformation
     if not dryrun:
-        pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming",
-                    colour="#BDC0BA")
+        pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming")
 
     for subj in subjlist:
         selected_subj = config.datasets[subj]
