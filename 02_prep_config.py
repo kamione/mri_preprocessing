@@ -81,7 +81,7 @@ P.S. fmriprep 1.2.5 and 20.2.1 were tested
     for dir_ in dicomdirs:
         session_init = 0
         fo.write(
-            f'    ["{dir_}", "{subjid_init: 03d}", "{session_init: 04d}"],\n')
+            f'    ["{dir_}", "{subjid_init:04}", "{session_init:02}"],\n')
         subjid_init += 1
         session_init += 1
     fo.write(']')
