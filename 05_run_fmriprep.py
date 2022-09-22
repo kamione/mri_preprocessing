@@ -49,8 +49,7 @@ def main(range, dryrun):
         shutil.copy2(Path(config.scriptdir, "license.txt"), license)
 
     if not dryrun:
-        pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming",
-                    colour="#BDC0BA")
+        pbar = tqdm(total=len(subjlist), unit="subject", desc="Transforming")
 
     for subj in subjlist:
         subjid = config.datasets[subj][1]
