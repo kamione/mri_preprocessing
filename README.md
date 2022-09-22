@@ -18,7 +18,7 @@ cd /path/to/script_folder
 Step 1:
 
 ```bash
-python 01_get_dicom.py -p /path/to/dicom_directory
+python 01_get_dicom.py -p /path/to/dicom_directory -k DICOM
 ```
 
 Step 2:
