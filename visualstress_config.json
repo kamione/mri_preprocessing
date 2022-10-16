@@ -1,0 +1,50 @@
+{
+    "descriptions": [
+        {
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+		"SeriesDescription": "MPRAGE SENSE"
+            }
+        },
+	{
+            "dataType": "anat",
+            "modalityLabel": "T1w",
+            "criteria": {
+                "SeriesDescription": "3D SAG T1 MPRAGE"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-onlyvision",
+            "criteria": {
+                "SeriesDescription": "FMRI TASK (ONLY VISION)"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-onlyvision",
+            "criteria": {
+                "SeriesDescription": "FMRI VISION ONLY"
+            }
+        },
+        {
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-rest",
+            "criteria": {
+                "SeriesDescription": "Ax fMRI resting HB Multiphase EPI"
+            }
+        },
+	{
+            "dataType": "func",
+            "modalityLabel": "bold",
+            "customLabels": "task-rest",
+            "criteria": {
+               	"SeriesDescription": "RESTING FMRI 38 slices SENSE"
+            }
+        }
+    ]
+}
